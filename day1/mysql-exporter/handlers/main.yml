@@ -1,0 +1,5 @@
+---
+# handlers file for mysql-exporter
+- name: reload systemd
+  command: systemctl daemon-reload
+

@@ -1,0 +1,7 @@
+Prometheus_port - 9090
+Node_exporter   - 9100
+alert_manager   - 9300
+nginx_exporter  - 9913
+mysql_exporter  - 9104
+jenkins_exporter- 9118
+collectd_exporter- 9103

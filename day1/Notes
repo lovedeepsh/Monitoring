@@ -1,0 +1,25 @@
+INFRA & APPLICATION MONITORING
+==============================
+
+INFRA MONITORING
+----------------
+
+- PROS AND CONS FOR PULL BASED AND PUSH BASED MONITORING ?
+
+
+PROMETHEUS
+
+- PULL BASED
+- EXPORTER
+- MADE BY GOOGLE IN GOLANG LANGUAGE AND ALSO OPEN SOURCE
+- /etc/proc (consist all the system details)
+- key:value concept
+- every exporter has its own default port
+- prometheus.yml
+- it stores time-series data
+- sqlite3 is used
+- scrape interval
+- evaluation interval
+- prometheus and alert manager architecture
+- In case of Alert Manager it becomes push based manager
+- 

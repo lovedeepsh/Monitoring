@@ -1,0 +1,11 @@
+[Unit]
+Description=jenkins_Exporter
+
+[Service]
+User=vagrant
+ExecStart=/opt/collectd_exporter-0.4.0.linux-amd64/collectd_exporter
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
+

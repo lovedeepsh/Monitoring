@@ -1,0 +1,33 @@
+---
+# tasks file for node-exporter
+
+- name: Downloading the binary
+  get_url:
+    url: "{{ url }}"
+    dest: /opt/
+
+- name: Installing from binary.
+  unarchive:
+    src: /opt/node_exporter-0.15.1.linux-amd64.tar.gz
+    dest: /opt/
+    remote_src: yes
+
+#- name: Coping binary to /usr/local/bin
+#  copy:
+#    src: /opt/node_exporter-0.15.1.linux-amd64/node_exporter
+#    dest: /usr/local/bin/
+#    remote_src: yes
+
+- name: Creating service for node_exporter.
+  copy:
+    src: node_exporter.service
+    dest: /etc/systemd/system/
+    mode: 0755
+    owner: root
+  notify: reload systemd
+     
+- name: Starting the node_exporter service
+  service:
+    name: node_exporter
+    state: started
+...

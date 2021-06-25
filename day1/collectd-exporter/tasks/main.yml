@@ -1,0 +1,26 @@
+---
+# tasks file for collectd-exporter
+- name: Downloading the binary
+  get_url:
+    url: "{{ url }}"
+    dest: /opt/
+
+- name: Installing from binary.
+  unarchive:
+    src: /opt/collectd_exporter-0.4.0.linux-amd64.tar.gz
+    dest: /opt/
+    remote_src: yes
+
+- name: Creating service for mysqld_exporter.
+  copy:
+    src: collectd_exporter.service
+    dest: /etc/systemd/system/
+    mode: 0755
+    owner: root
+  notify: reload systemd
+
+- name: Starting the node_exporter service
+  service:
+    name: collectd_exporter
+    state: started
+

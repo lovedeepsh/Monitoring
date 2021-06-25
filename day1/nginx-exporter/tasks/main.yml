@@ -1,0 +1,27 @@
+---
+# tasks file for nginx-exporter
+- name: Downloading the binary
+  get_url:
+    url: "{{ url }}"
+    dest: /opt/
+
+- name: Installing from binary.
+  unarchive:
+    src: /opt/nginx-vts-exporter-0.10.3.linux-amd64.tar.gz
+    dest: /opt/
+    remote_src: yes
+
+- name: Creating service for node_exporter.
+  copy:
+    src: nginx_exporter.service
+    dest: /etc/systemd/system/
+    mode: 0755
+    owner: root
+  notify: reload systemd
+     
+- name: Starting the node_exporter service
+  service:
+    name: nginx_exporter
+    state: started
+...
+

@@ -1,0 +1,44 @@
+---
+# tasks file for mysql-exporter
+- name: Downloading the binary
+  get_url:
+    url: "{{ url }}"
+    dest: /opt/
+
+- name: Installing from binary.
+  unarchive:
+    src: /opt/mysqld_exporter-0.10.0.linux-amd64.tar.gz
+    dest: /opt/
+    remote_src: yes
+
+- name: Configuring mysqld_exporter
+  shell: sudo adduser --no-create-home --disabled-login --shell /bin/false --gecos "MySQL exporter user" mysql_exporter
+
+- name: Creating Directory
+  file:
+    path: /etc/mysql_exporter
+    owner: mysql_exporter
+    group: mysql_exporter
+    state: directory
+    mode: 0755
+
+- name: Configuring .my.conf file
+  copy: 
+    src: .my.cnf
+    dest: /etc/mysql_exporter/.my.cnf
+    owner: mysql_exporter
+    group: mysql_exporter
+    mode: 600
+
+- name: Creating service for mysqld_exporter.
+  copy:
+    src: mysqld_exporter.service
+    dest: /etc/systemd/system/
+    mode: 0755
+    owner: root
+  notify: reload systemd
+
+- name: Starting the node_exporter service
+  service:
+    name: mysqld_exporter
+    state: started

@@ -1,0 +1,9 @@
+[Unit]
+Description=Nginx Exporter
+
+[Service]
+User=vagrant
+ExecStart=/opt/nginx-vts-exporter-0.10.3.linux-amd64/nginx-vts-exporter
+
+[Install]
+WantedBy=default.target

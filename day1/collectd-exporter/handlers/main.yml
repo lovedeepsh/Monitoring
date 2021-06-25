@@ -1,0 +1,4 @@
+---
+# handlers file for collectd-exporter
+- name: reload systemd
+  command: systemctl daemon-reload

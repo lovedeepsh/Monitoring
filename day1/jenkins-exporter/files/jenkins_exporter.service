@@ -1,0 +1,11 @@
+[Unit]
+Description=jenkins_Exporter
+
+[Service]
+Environment=jenkins='http://localhost:8080/'
+User=vagrant
+ExecStart=/opt/jenkins_exporter-1.1.0/jenkins_exporter.py -j $jenkins
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
